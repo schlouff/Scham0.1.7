@@ -2,7 +2,7 @@ import io
 from google.cloud import storage
 
 def upload_pdf_to_gcs(bucket_name, source_file, destination_blob_name):
-    """Lädt eine Datei oder ein BytesIO-Objekt in den Google Cloud Storage Bucket hoch."""
+    credentials = service_account.Credentials.from_service_account_info(st.secrets["gcp_service_account"])
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
