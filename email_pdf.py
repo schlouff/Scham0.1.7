@@ -6,8 +6,8 @@ from email import encoders
 import os
 
 def send_test_pdf(receiver_email):
-    sender_email = "jakobschleiff@gmail.com"  # Ersetzen Sie dies durch Ihre E-Mail-Adresse
-    password = "(]8mmj0^P=PL;V+g66=g"  # Ersetzen Sie dies durch Ihr E-Mail-Passwort
+    sender_email = "virtualsexploration@gmail.com"  # Ersetzen Sie dies durch Ihre E-Mail-Adresse
+    password = "wafnix-hoHcan-gazqi8"  # Ersetzen Sie dies durch Ihr E-Mail-Passwort
 
     # E-Mail-Inhalt erstellen
     message = MIMEMultipart()
