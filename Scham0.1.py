@@ -185,12 +185,10 @@ if __name__ == '__main__':
         # Generiere einen Timestamp für den Dateinamen
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-st.download_button(
-    label=f"10x15 PDF herunterladen ({timestamp})",
-    data=pdf,
-    file_name=f"10x15_pdf_mit_bild_{timestamp}.pdf",
-    mime="application/pdf"
-)
+        st.download_button(
+            label=f"10x15 PDF herunterladen ({timestamp})",
+            data=pdf_buffer,
+            file_name=f"10x15_pdf_mit_bild_{timestamp}.pdf",
+            mime="application/pdf"
+        )
 
-
-# asbnkdsja
