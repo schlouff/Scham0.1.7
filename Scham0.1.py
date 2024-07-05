@@ -60,14 +60,14 @@ def chat_with_bot(user_input):
 def create_artistic_description(responses):
     description_prompt = (
         f"Erstelle (auf deutsch) eine künstlerische Beschreibung, die auf den folgenden Eingaben beruht:\n"
-        f"1. Peinliche Situation: {responses[1]}\n"
-        f"2. Gesprochene Worte und Stimmen: {responses[2]}\n"
+        f"1. : {responses[1]}\n"
+        f"2. : {responses[2]}\n"
         f"3. Details (Kleidung, Gegenstände, Farben, Gerüche): {responses[3]}\n"
-        f"4. Du als Tier oder Gegenstand: {responses[4]}\n"
+        f"4. ich als Tier oder Gegenstand: {responses[4]}\n"
         f"5. Andere als Tiere: {responses[5]}\n"
         f"6. Raum oder Landschaft: {responses[6]}\n"
         f"7. Kraftgebendes Element: {responses[7]}\n"
-        f"Bitte integriere all diese Elemente in eine zusammenhängende, bildhafte Beschreibung."
+        f"Bitte integriere all diese Elemente in eine zusammenhängende, bildhafte Beschreibung. Wenn Personen genannt werden ersetze sie durch metaphorische Tiere die gut passen können. 4. ich als Tier oder Gegenstand ist Protagonist der Szene. 7. kraftgebendes Element bekommt besonders viel Aufmerksamkeit. Es kann die ganze Szenerie tröstlich beeinflussen oder einfärben. Es ist deswegen besonders groß oder an einer besonders markanten Stelle."
     )
 
     messages.append({'role': 'user', 'content': description_prompt})
