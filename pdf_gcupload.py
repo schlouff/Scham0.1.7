@@ -5,6 +5,7 @@ import os
 
 def upload_to_gcs(bucket_name, source_file_path, destination_blob_name):
     """Lädt eine Datei in den Google Cloud Storage Bucket hoch."""
+
     storage_client = storage.Client()
     bucket = storage_client.bucket(bucket_name)
     blob = bucket.blob(destination_blob_name)
@@ -20,8 +21,8 @@ st.title("PDF Uploader für Google Cloud Storage")
 file_path = "test_pdf.pdf"
 file_name = os.path.basename(file_path)
 
-# GCS Bucket Name aus den Secrets lesen
-bucket_name = st.secrets["gcs_bucket"]
+# GCS Bucket Name
+bucket_name = "vse-schamstation24-07-2"
 
 if st.button("Datei hochladen"):
     try:
