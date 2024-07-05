@@ -23,15 +23,23 @@ client = OpenAI()
 
 # Initialisierungen
 questions = [
-    "Hallo. Schön, dass du hier bist.\n\nBist du bereit?\n\nDann schreib 'bereit' und drück auf 'send'.",
-    "Erinnere dich an eine peinliche Situation.\n\nDu musst sie niemandem sagen. Aber wir wollen daraus ein Bild machen.\n\nAlso: Was hast du für eine Situation erlebt, die peinlich war oder die Scham ausgelöst hat?\n\nÜbernimm Verantwortung für dich.\n\nManche Erinnerungen an Scham oder Peinlichkeit, können beunruhigende Gefühle auslösen. Entscheide dich für etwas, mit dem du hier und jetzt umgehen kannst.\n\nNimm dir Zeit.\n\nWenn du eine Erinnerung in deinem Kopf hast, schreib 'ok' und drück auf 'send'.",
-    "Erinnere dich an das, was gesagt wurde.\n\nRuf dir die Situation vor Augen.\n\nWo ist sie passiert?\n\nWer war dabei?\n\nGibt es bestimmte Wörter oder Sätze, an die du dich erinnerst? Wie klang die Stimme von dir und deinem Gegenüber?\n\nWenn du dich genug erinnert hast, schreib 'ok' und drück auf 'send'.",
-    "Erinnere dich an die Details und schreib sie auf.\n\nGibt es Kleidungsstücke, Gegenstände, Farben, Gerüche, an die du dich erinnerst?\n\nWenn du ein oder zwei Details teilen willst, schreib sie auf.",
-    "Wandel es um: du als Tier\n\nStell dir vor, du wärst in der Situation ein Tier gewesen. Was wäre das für ein Tier? Vielleicht eine kleine Maus oder ein tollpatschiges Schwein? Oder ein Gegenstand, wie ein stummer Stein oder ein verblühtes Gänseblümchen?\n\nSchreib das Tier oder die andere Sache auf, die du warst und drück auf 'send'.",
-    "Die anderen als Tier\n\nWelches Tier oder anderes wären die anderen gewesen?\n\nVielleicht ein fieses Stinktier, ein Herde lachender Kaninchen oder etwas anderes?\n\nSchreib es auf und drück auf 'send'.",
-    "Als vorletztes: Raum oder Landschaft\n\nWenn die Situation ein Raum oder eine Landschaft wäre, wie sähe das aus? Vielleicht ein enger Raum, in dem das Atmen schwer fällt. Oder eine Bühne mit grellem Scheinwerferlicht?\n\nSchreib es auf.\n\nWenn du willst, füge eine weitere Beschreibung hinzu. Z.B.: Ein schüchterne Ente steht auf einer Bühne in grellem Scheinwerferlicht. Im Publikum sitzen lauter Mäuse und piepsen aufgeregt.\n\nUnd drück auf 'send'.",
-    "Was gibt dir Kraft?\n\nWas ist ein Lieblingsgegenstand, eine Farbe, eine Ort, der dir Kraft gibt.\n\n(Personen sind leider nicht erlaubt, aber du kannst sie in Form von kraftspendenden Tieren auch nennen.)",
-    "Danke!\n\nUnten erscheint gleich dein Bild."
+    "**Hallo. Schön, dass du hier bist.**\n\nBist du bereit?\n\n**Dann schreib 'bereit' und drück auf 'send'.**",
+
+    "**Erinnere dich an eine peinliche Situation.**\n\nDu musst sie niemandem sagen. Aber wir wollen daraus ein Bild machen.\n\nAlso: Was hast du für eine Situation erlebt, die peinlich war oder die Scham ausgelöst hat?\n\n**Übernimm Verantwortung für dich.**\n\nManche Erinnerungen an Scham oder Peinlichkeit, können beunruhigende Gefühle auslösen. Entscheide dich für etwas, mit dem du hier und jetzt umgehen kannst.\n\nNimm dir Zeit.\n\n**Wenn du eine Erinnerung in deinem Kopf hast, schreib 'ok' und drück auf 'send'.**",
+
+    "**Erinnere dich an das, was gesagt wurde.**\n\nRuf dir die Situation vor Augen.\n\nWo ist sie passiert?\n\nWer war dabei?\n\nGibt es bestimmte Wörter oder Sätze, an die du dich erinnerst? Wie klang die Stimme von dir und deinem Gegenüber?\n\n**Wenn du dich genug erinnert hast, schreib 'ok' und drück auf 'send'.**",
+
+    "**Erinnere dich an die Details und schreib sie auf.**\n\nGibt es Kleidungsstücke, Gegenstände, Farben, Gerüche, an die du dich erinnerst?\n\n**Wenn du ein oder zwei Details teilen willst, schreib sie auf.**",
+
+    "**Wandel es um: du als Tier**\n\nStell dir vor, du wärst in der Situation ein Tier gewesen. Was wäre das für ein Tier? Vielleicht eine kleine Maus oder ein tollpatschiges Schwein? Oder ein Gegenstand, wie ein stummer Stein oder ein verblühtes Gänseblümchen?\n\n**Schreib das Tier oder die andere Sache auf, die du warst und drück auf 'send'.**",
+
+    "**Die anderen als Tier**\n\nWelches Tier oder anderes wären die anderen gewesen?\n\nVielleicht ein fieses Stinktier, ein Herde lachender Kaninchen oder etwas anderes?\n\n**Schreib es auf und drück auf 'send'.**",
+
+    "**Als vorletztes: Raum oder Landschaft**\n\nWenn die Situation ein Raum oder eine Landschaft wäre, wie sähe das aus? Vielleicht ein enger Raum, in dem das Atmen schwer fällt. Oder eine Bühne mit grellem Scheinwerferlicht?\n\nSchreib es auf: **Wie sieht deine Landschaft aus?**\n\n**Und drück auf 'send'.**",
+
+    "**Was gibt dir Kraft?**\n\nWas ist ein Lieblingsgegenstand, eine Farbe, eine Ort, der dir Kraft gibt.\n\n(Personen sind leider nicht erlaubt, aber du kannst sie in Form von kraftspendenden Tieren auch nennen.)",
+
+    "**Danke!**\n\nUnten erscheint gleich dein Bild."
 ]
 
 bot_responses = list()
@@ -63,11 +71,11 @@ def create_artistic_description(responses):
         f"1. : {responses[1]}\n"
         f"2. : {responses[2]}\n"
         f"3. Details (Kleidung, Gegenstände, Farben, Gerüche): {responses[3]}\n"
-        f"4. ich als Tier oder Gegenstand: {responses[4]}\n"
-        f"5. Andere als Tiere: {responses[5]}\n"
+        f"4. Protagonist: {responses[4]}\n"
+        f"5. andere Figuren: {responses[5]}\n"
         f"6. Raum oder Landschaft: {responses[6]}\n"
-        f"7. Kraftgebendes Element: {responses[7]}\n"
-        f"Bitte integriere all diese Elemente in eine zusammenhängende, bildhafte Beschreibung. Wenn Personen genannt werden ersetze sie durch metaphorische Tiere die gut passen können. 4. ich als Tier oder Gegenstand ist Protagonist der Szene. 7. kraftgebendes Element bekommt besonders viel Aufmerksamkeit. Es kann die ganze Szenerie tröstlich beeinflussen oder einfärben. Es ist deswegen besonders groß oder an einer besonders markanten Stelle."
+        f"7. besondere Aufmerksamkeit als Kraftgebendes Element bekommt: {responses[7]}\n"
+        f"Bitte integriere all diese Elemente in eine zusammenhängende, bildhafte Beschreibung. Wenn Personen genannt werden ersetze sie durch metaphorische Tiere die gut passen können oder lass sie weg. "
     )
 
     messages.append({'role': 'user', 'content': description_prompt})
