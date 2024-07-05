@@ -23,13 +23,15 @@ client = OpenAI()
 
 # Initialisierungen
 questions = [
-    "Hallo. Schön, dass du hier bist.\n\nDu hast jetzt die Möglichkeit eine Situation zu untersuchen, die bei dir Scham ausgelöst hat, die dir peinlich/unangenehm war und es vielleicht noch ist. Was für eine peinliche oder schamauslösende Situation fällt dir ein? Du wirst mit der Erinnerung an diese Situation weiterarbeiten. Wenn du merkst, das ist jetzt gerade zu krass, vielleicht gibt es ja auch eine Situation, in der du nicht so tief einsteigst, aber wo das Gefühl auch wieder auftaucht.\nDu übernimmst die Verantwortung für dich selbst in dieser Arbeit, aber wir geben dir Raum und Zeit zum reflektieren und vielleicht sogar anstöße das Gefühl zu der Situation zu verändern. Also bist du startklar?\nSchreib “ok” - und dann kann es losgehen.",
-    "Schau, welche Peinliche/schamhafte Situation heute für dich passt. Schau mal in deinem inneren, was du alles siehst in dieser Situation und was du dabei fühlst. Lass dir dabei zeit und schreib “ok” wenn du eine Situation vor Augen hast.",
-    "Gibt es in dieser Situation etwas, dass jemand gesagt hat? Was ein bestimmtes Gefühl ausgelöst hat? Gibt es was was dir an dieser Situation besonders auffällt vielleicht ein Detail?\nSchreib “ok”, wenn es weitergehen kann.",
-    "Jetzt überleg mal. Kannst du dieser Situation einen Namen geben? Oder eine Überschrift? Die Überschrift kann sich darauf beziehen, oder ein Headliner sein.\nWas wäre ein Songtitel für diese Situation? Schreibe die Überschrift oder den Songtitel in das unten liegende Feld. Bitte verzichte hier auf konkrete Namen(eigentlich hatten wir diese Aufgabe im Kopf gemacht weil da auch krasse sachen rauskommen können die vielleicht so nicht ausgesprochen werden müssen. )\nJetzt schreib den Namen auf.",
-    "Wenn diese Situation ein Bild bekommen würde, wie sähe das aus?\nWas für eine Landschaft wäre diese Situation? Eine Landschaft kann irgendein Ort sein, kann auch in der Stadt sein oder ein Raum. Das muss gar nichts mit dem Ort zu tun haben, wo die Situation stattgefunden hat. Es geht eher um das Gefühl von der Situation. Ist das eng, oder ganz weit?\nBeschreib jetzt diese Landschaft. Wie sieht sie aus?\n",
-    "Vielleicht ist es eher ein Tier? Vielleicht denkt ihr an euch, was für ein Tier ihr gewesen wärt, z.b. wie eine Maus, die sich verkrümeln wollte oder ihr denkt an das Gegenüber welches Tier wäre das im Vergleich zu euch gewesen. Beschreibt dieses Tier wie sieht das aus.\nNimm dir Zeit, wenn du deine Landschaft oder dein Tier vor Augen hast schreib alles dazu unten in das Feld hinein.",
-    "Super, du hast jetzt ein Gefühl, eine Überschrift und ein Bild. Du hast gerade gesehen, wie Kunst entstehen kann.\n\nJetzt soll die Bildbeschreibung kreiert werden."
+    "Hallo. Schön, dass du hier bist.\n\nBist du bereit?\n\nDann schreib „bereit" und drück auf „send".",
+    "Erinnere dich an eine peinliche Situation.\n\nDu musst sie niemandem sagen. Aber wir wollen daraus ein Bild machen.\n\nAlso: Was hast du für eine Situation erlebt, die peinlich war oder die Scham ausgelöst hat?\n\nÜbernimm Verantwortung für dich.\n\nManche Erinnerungen an Scham oder Peinlichkeit, können beunruhigende Gefühle auslösen. Entscheide dich für etwas, mit dem du hier und jetzt umgehen kannst.\n\nNimm dir Zeit.\n\nWenn du eine Erinnerung in deinem Kopf hast, schreib „ok" und drück auf „send".",
+    "Erinnere dich an das, was gesagt wurde.\n\nRuf dir die Situation vor Augen.\n\nWo ist sie passiert?\n\nWer war dabei?\n\nGibt es bestimmte Wörter oder Sätze, an die du dich erinnerst? Wie klang die Stimme von dir und deinem Gegenüber?\n\nWenn du dich genug erinnert hast, schreib „ok" und drück auf „send".",
+    "Erinnere dich an die Details und schreib sie auf.\n\nGibt es Kleidungsstücke, Gegenstände, Farben, Gerüche, an die du dich erinnerst?\n\nWenn du ein oder zwei Details teilen willst, schreib sie auf.",
+    "Wandel es um: du als Tier\n\nStell dir vor, du wärst in der Situation ein Tier gewesen. Was wäre das für ein Tier? Vielleicht eine kleine Maus oder ein tollpatschiges Schwein? Oder ein Gegenstand, wie ein stummer Stein oder ein verblühtes Gänseblümchen?\n\nSchreib das Tier oder die andere Sache auf, die du warst und drück auf „send".",
+    "Die anderen als Tier\n\nWelches Tier oder anderes wären die anderen gewesen?\n\nVielleicht ein fieses Stinktier, ein Herde lachender Kaninchen oder etwas anderes?\n\nSchreib es auf und drück auf „send".",
+    "Als vorletztes: Raum oder Landschaft\n\nWenn die Situation ein Raum oder eine Landschaft wäre, wie sähe das aus? Vielleicht ein enger Raum, in dem das Atmen schwer fällt. Oder eine Bühne mit grellem Scheinwerferlicht?\n\nSchreib es auf.\n\nWenn du willst, füge eine weitere Beschreibung hinzu. Z.B.: Ein schüchterne Ente steht auf einer Bühne in grellem Scheinwerferlicht. Im Publikum sitzen lauter Mäuse und piepsen aufgeregt.\n\nUnd drück auf „send".",
+    "Was gibt dir Kraft?\n\nWas ist ein Lieblingsgegenstand, eine Farbe, eine Ort, der dir Kraft gibt.\n\n(Personen sind leider nicht erlaubt, aber du kannst sie in Form von kraftspendenden Tieren auch nennen.)",
+    "Danke!\n\nUnten erscheint gleich dein Bild."
 ]
 
 bot_responses = list()
@@ -57,13 +59,15 @@ def chat_with_bot(user_input):
 
 def create_artistic_description(responses):
     description_prompt = (
-        f"Erstelle (auf deutsch) eine künstlerische Beschreibung, die auf den Eingaben beruht:\n"
-        f"1. Situation: {responses[0]}\n"
-        f"2. Situation Details: {responses[1]}\n"
-        f"3. Detail: {responses[2]}\n"
-        f"4. Title: {responses[3]}\n"
-        f"5. Landscape: {responses[4]}\n"
-        f"6. Animal (if applicable): {responses[5] if len(responses) > 5 else 'N/A'}"
+        f"Erstelle (auf deutsch) eine künstlerische Beschreibung, die auf den folgenden Eingaben beruht:\n"
+        f"1. Peinliche Situation: {responses[1]}\n"
+        f"2. Gesprochene Worte und Stimmen: {responses[2]}\n"
+        f"3. Details (Kleidung, Gegenstände, Farben, Gerüche): {responses[3]}\n"
+        f"4. Du als Tier oder Gegenstand: {responses[4]}\n"
+        f"5. Andere als Tiere: {responses[5]}\n"
+        f"6. Raum oder Landschaft: {responses[6]}\n"
+        f"7. Kraftgebendes Element: {responses[7]}\n"
+        f"Bitte integriere all diese Elemente in eine zusammenhängende, bildhafte Beschreibung."
     )
 
     messages.append({'role': 'user', 'content': description_prompt})
@@ -126,58 +130,50 @@ if __name__ == '__main__':
         if 'responses' not in st.session_state:
             st.session_state.responses = []
 
-
-
-    if 'current_question_index' not in st.session_state:
-        st.session_state.current_question_index = 0
-
-    if 'responses' not in st.session_state:
-        st.session_state.responses = []
-
-    with st.form(key='chat_form'):
-        if st.session_state.current_question_index < len(questions):
-            current_question = questions[st.session_state.current_question_index]
-        else:
-            current_question = "Thank you for your responses. How else can I assist you?"
-
-        st.write(f'Chat Bot: {current_question}')
-        user_input = st.text_input('You:', '')
-
-        submit_button = st.form_submit_button(label='Send')
-
-        if submit_button:
-            if user_input.lower() in ['exit', 'quit']:
-                st.write('Chat Bot: I was happy to assist you. Bye bye!')
-                time.sleep(2)
-                st.stop()
-
-            if user_input.lower() == '':
-                st.warning('Please enter a message.')
+        with st.form(key='chat_form'):
+            if st.session_state.current_question_index < len(questions):
+                current_question = questions[st.session_state.current_question_index]
             else:
-                st.session_state.responses.append(user_input)
+                current_question = "Danke für deine Antworten. Wie kann ich dir sonst noch helfen?"
 
-                if 'history' not in st.session_state:
-                    st.session_state['history'] = f'You: {user_input}\n'
+            st.write(f'Chat Bot: {current_question}')
+            user_input = st.text_input('Du:', '')
+
+            submit_button = st.form_submit_button(label='Senden')
+
+            if submit_button:
+                if user_input.lower() in ['exit', 'quit']:
+                    st.write('Chat Bot: Ich war froh, dir helfen zu können. Tschüss!')
+                    time.sleep(2)
+                    st.stop()
+
+                if user_input.lower() == '':
+                    st.warning('Bitte gib eine Nachricht ein.')
                 else:
-                    st.session_state['history'] += f'You: {user_input}\n'
+                    st.session_state.responses.append(user_input)
 
-                st.text_area(label='Chat History', value=st.session_state['history'], height=400)
+                    if 'history' not in st.session_state:
+                        st.session_state['history'] = f'Du: {user_input}\n'
+                    else:
+                        st.session_state['history'] += f'Du: {user_input}\n'
 
-                if st.session_state.current_question_index < len(questions) - 1:
-                    st.session_state.current_question_index += 1
-                elif st.session_state.current_question_index == len(questions) - 1:
-                    artistic_description = create_artistic_description(st.session_state.responses)
-                    st.write(f'Artistic Description: {artistic_description}')
+                    st.text_area(label='Chat-Verlauf', value=st.session_state['history'], height=400)
 
-                    # Erzeuge die Bild-URL und zeige sie an
-                    image_url = create_image_url(artistic_description)
-                    st.write(f'Image URL: {image_url}')
-                    st.image(image_url)
+                    if st.session_state.current_question_index < len(questions) - 1:
+                        st.session_state.current_question_index += 1
+                    elif st.session_state.current_question_index == len(questions) - 1:
+                        artistic_description = create_artistic_description(st.session_state.responses)
+                        st.write(f'Künstlerische Beschreibung: {artistic_description}')
 
-                    # Erzeuge das PDF mit der generierten Bild-URL
-                    pdf = create_10x15_pdf_with_image(image_url, st.session_state.user_name)
+                        # Erzeuge die Bild-URL und zeige sie an
+                        image_url = create_image_url(artistic_description)
+                        st.write(f'Bild-URL: {image_url}')
+                        st.image(image_url)
 
-                    st.session_state.current_question_index += 1
+                        # Erzeuge das PDF mit der generierten Bild-URL
+                        pdf = create_10x15_pdf_with_image(image_url, st.session_state.user_name)
+
+                        st.session_state.current_question_index += 1
     if 'pdf' in locals():
         # Konvertieren Sie das PDF in ein BytesIO-Objekt
         pdf_bytes = BytesIO(pdf.getvalue())
